@@ -10,18 +10,18 @@ class DetailTransaksi extends Model
     use HasFactory;
 
     protected $table = 'detail_transaksi';
-    public $incrementing = false; // Disable auto-incrementing for composite key
 
     protected $fillable = [
-        'id_transaksi', 'id_item', 'subtotal_harga'
+        'id_transaksi', 'id_item', 'subtotal_harga', 'quantity',
     ];
 
-    // Relationships
+    // Relasi dengan Transaksi (Many to One)
     public function transaksi()
     {
         return $this->belongsTo(Transaksi::class, 'id_transaksi');
     }
 
+    // Relasi dengan Menu (Many to One)
     public function menu()
     {
         return $this->belongsTo(Menu::class, 'id_item');

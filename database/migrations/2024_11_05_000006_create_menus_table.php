@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('menu', function (Blueprint $table) {
             $table->id('id_item');
-            $table->string('nama_item');
+            $table->string('nama_item')->unique();
             $table->decimal('harga', 15, 2);
             $table->string('kategori');
             $table->timestamps();

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('level', function (Blueprint $table) {
             $table->id('id_level');
-            $table->string('nama_level');
+            $table->string('nama_level')->unique();
             $table->integer('min_poin');
             $table->integer('max_poin');
             $table->timestamps();

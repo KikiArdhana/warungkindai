@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_pelanggan');
             $table->unsignedBigInteger('id_level');
             $table->string('nama_pelanggan');
-            $table->string('no_telepon');
+            $table->string('no_telepon')->unique();
             $table->timestamps();
 
             $table->foreign('id_level')->references('id_level')->on('level');

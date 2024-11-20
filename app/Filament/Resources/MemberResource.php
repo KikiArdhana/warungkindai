@@ -30,7 +30,8 @@ class MemberResource extends Resource
                 Forms\Components\TextInput::make('no_telepon')
                     ->required()
                     ->maxLength(15)
-                    ->label('Nomor Telepon'),
+                    ->label('Nomor Telepon')
+                    ->unique(ignoreRecord: true),
 
                 Forms\Components\Select::make('id_level')
                     ->label('Level')
@@ -47,7 +48,6 @@ class MemberResource extends Resource
                 
                 TextColumn::make('nama_pelanggan')->label('Nama Pelanggan')
                 ->searchable(),
-                
                 TextColumn::make('no_telepon')->label('Nomor Telepon'),
                 TextColumn::make('level.nama_level')->label('Level'),
                 TextColumn::make('total_poin')->label('Total Poin'), // Menggunakan accessor

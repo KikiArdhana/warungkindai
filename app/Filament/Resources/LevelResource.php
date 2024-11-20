@@ -24,7 +24,8 @@ class LevelResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nama_level') // Input untuk nama_level
                     ->required() // Pastikan ini diisi
-                    ->maxLength(255), // Atur panjang maksimum sesuai kebutuhan
+                    ->maxLength(255) // Atur panjang maksimum sesuai kebutuhan
+                    ->unique(ignoreRecord: true),
 
                 Forms\Components\TextInput::make('min_poin') // Input untuk min_poin
                     ->required() // Pastikan ini diisi

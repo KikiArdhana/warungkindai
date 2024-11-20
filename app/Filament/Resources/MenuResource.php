@@ -26,7 +26,8 @@ class MenuResource extends Resource
                     ->required() // Pastikan ini wajib diisi
                     ->label('Nama Item') // Label untuk field ini
                     ->maxLength(255) // Maksimal panjang input
-                    ->placeholder('Masukkan nama item'), // Placeholder untuk memberikan petunjuk
+                    ->placeholder('Masukkan nama item')// Placeholder untuk memberikan petunjuk
+                    ->unique(ignoreRecord: true),
 
                 Forms\Components\TextInput::make('harga')
                     ->required() // Pastikan ini wajib diisi
