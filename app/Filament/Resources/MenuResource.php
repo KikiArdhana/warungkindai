@@ -28,7 +28,7 @@ class MenuResource extends Resource
                     ->maxLength(255) // Maksimal panjang input
                     ->placeholder('Masukkan nama item')// Placeholder untuk memberikan petunjuk
                     ->unique(ignoreRecord: true),
-
+                  
                 Forms\Components\TextInput::make('harga')
                     ->required() // Pastikan ini wajib diisi
                     ->label('Harga') // Label untuk field ini
@@ -48,9 +48,11 @@ class MenuResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id_item')->label('ID Item'), // Menampilkan ID Item
-                TextColumn::make('nama_item')->label('Nama Item'), // Menampilkan Nama Item
+                TextColumn::make('nama_item')->label('Nama Item')   ->searchable(),// Menampilkan Nama Item
                 TextColumn::make('harga')->label('Harga'), // Menampilkan Harga
                 TextColumn::make('kategori')->label('Kategori'), // Menampilkan Kategori
+             
+
             ])
             ->filters([
                 // Tambahkan filter sesuai kebutuhan

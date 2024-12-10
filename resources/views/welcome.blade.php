@@ -27,13 +27,14 @@
     .section-reward {
         background-image: url("/image/reward.png");
 
-    background-size: cover;
-    background-position: center;
-}
+        background-size: cover;
+        background-position: center;
+    }
 
     section {
         padding: 100px 0;
         height: 100vh;
+        
         /* Tinggi setiap section penuh layar */
         display: flex;
         align-items: center;
@@ -103,10 +104,48 @@
     #navbar.scrolled .navbar-brand {
         color: black;
     }
+    /* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+    .section-reward {
+        padding: 50px 20px; /* Kurangi padding agar tidak terlalu sempit */
+        text-align: center; /* Pastikan konten rata tengah */
+    }
+
+    #reward .flex {
+        flex-direction: column; /* Tumpuk elemen secara vertikal */
+    }
+
+    #reward input[type="search"] {
+        width: 100%; /* Sesuaikan input agar lebar penuh */
+        margin-bottom: 10px; /* Tambahkan jarak bawah */
+    }
+
+    #rewardInfo {
+        margin-top: 20px;
+    }
+
+    #about {
+        padding: 50px 20px; /* Kurangi padding di sekitar konten */
+        text-align: center; /* Pusatkan teks */
+    }
+
+    #about .container {
+        flex-direction: column; /* Tumpuk elemen secara vertikal */
+    }
+
+    #about .text-content {
+        margin-bottom: 20px; /* Tambahkan jarak bawah antara teks dan gambar */
+    }
+
+    #about img {
+        max-width: 100%; /* Pastikan gambar tidak melampaui layar */
+        height: auto;
+    }
+}
+
 </style>
 
 <body>
-
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
@@ -150,10 +189,10 @@
                     <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl" data-aos="fade-right">
                         it’s not just <span class="highlight">FOOD</span>,
                     </h1>
-                    <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl mt-2"data-aos="fade-right">
+                    <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl mt-2" data-aos="fade-right">
                         it’s an <span class="highlight">EXPERIENCE</span>.
                     </h1>
-                    <p class="mt-6 text-lg leading-8 text-white"data-aos="fade-right">Menghadirkan cita rasa khas Banjar yang autentik. Nikmati sensasi kuliner yang menggugah selera dan penuh kehangatan budaya Banjar.</p>
+                    <p class="mt-6 text-lg leading-8 text-white" data-aos="fade-right">Menghadirkan cita rasa khas Banjar yang autentik. Nikmati sensasi kuliner yang menggugah selera dan penuh kehangatan budaya Banjar.</p>
                     <div class="mt-10 flex items-center gap-x-6" data-aos="fade-down" data-aos-duration="1500">
                         <a href="menu.php" class="rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-black shadow-lg hover:bg-gray-200 hover:text-black transform transition-transform duration-300 hover:scale-110">
                             View Menu
@@ -209,6 +248,10 @@
                         <p id="poinText" class="flex items-center">
                             <i class="fa fa-gift mr-2"></i><span class="reward-label">Poin:</span> <span id="poin"></span>
                         </p>
+                        <p id="diskonText" class="flex items-center">
+                            <i class="fa fa-gift mr-2"></i><span class="reward-label">Poin:</span> <span id="diskon"></span>
+                        </p>
+
                     </div>
                 </div>
             </div>
@@ -255,10 +298,10 @@
                 <img class="h-auto max-w-full border-r" src="https://asset.kompas.com/crops/VEMd5H4lRZYH6QAc3zr0b003UfU=/0x0:880x587/1200x800/data/photo/2023/08/16/64dc53ca9f3db.jpg" alt="Gallery Image 3" data-aos="fade-up" data-aos-duration="1500">
             </div>
             <div>
-                <img class="h-auto max-w-full border-r" src="https://www.dapurkobe.co.id/wp-content/uploads/nasi-kuning-kobe.jpg" alt="Gallery Image 4"  data-aos="fade-up" data-aos-duration="2000">
+                <img class="h-auto max-w-full border-r" src="https://www.dapurkobe.co.id/wp-content/uploads/nasi-kuning-kobe.jpg" alt="Gallery Image 4" data-aos="fade-up" data-aos-duration="2000">
             </div>
             <div>
-                <img class="h-auto max-w-full border-r" src="https://cdn.idntimes.com/content-images/community/2022/08/lauk-pendamping-nasi-kuning-paling-favorit-lauk-nasi-kuning-apa-saja-resep-nasi-kuning-tips-nasi-kuning-lauk-nasi-kuning-paling-enak-resep-lauk-nasi-kuning-mudah-9cde86371d7fc78c91ae80a6ffab250e-f70e9439deafc113c2b9efd9ee627bc4_600x400.jpg" alt="Gallery Image 5"  data-aos="fade-up" data-aos-duration="2500">
+                <img class="h-auto max-w-full border-r" src="https://cdn.idntimes.com/content-images/community/2022/08/lauk-pendamping-nasi-kuning-paling-favorit-lauk-nasi-kuning-apa-saja-resep-nasi-kuning-tips-nasi-kuning-lauk-nasi-kuning-paling-enak-resep-lauk-nasi-kuning-mudah-9cde86371d7fc78c91ae80a6ffab250e-f70e9439deafc113c2b9efd9ee627bc4_600x400.jpg" alt="Gallery Image 5" data-aos="fade-up" data-aos-duration="2500">
             </div>
         </div>
     </section>
@@ -352,9 +395,6 @@
     </footer>
 
 
-
-
-
     <script>
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
@@ -365,6 +405,7 @@
             }
         });
     </script>
+
 
     <script>
         function checkReward() {
@@ -381,12 +422,52 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
-                        // Menampilkan data member
+                        // tampil data member
                         document.getElementById('rewardInfo').classList.remove('hidden');
                         document.getElementById('namaPelanggan').innerText = `Nama Pelanggan: ${data.data.nama_pelanggan}`;
                         document.getElementById('noTeleponText').innerText = `Nomor Telepon: ${data.data.no_telepon}`;
                         document.getElementById('levelText').innerText = `Level: ${data.data.level}`;
+
+                        // diskon berdasarkan level king
+                        let diskon = 0;
+                        switch (data.data.level.toLowerCase()) {
+                            case 'bronze':
+                                diskon = 10;
+                                break;
+                            case 'silver':
+                                diskon = 20;
+                                break;
+                            case 'gold':
+                                diskon = 30;
+                                break;
+                            case 'platinum':
+                                diskon = 40;
+                                break;
+                            case 'diamond':
+                                diskon = 50;
+                                break;
+                            case 'master':
+                                diskon = 60;
+                                break;
+                            case 'grandmaster':
+                                diskon = 70;
+                                break;
+                            case 'challenger':
+                                diskon = 80;
+                                break;
+                            case 'legend':
+                                diskon = 90;
+                                break;
+                            case 'mythic':
+                                diskon = 100;
+                                break;
+                                //dstnya 
+                            default:
+                                diskon = 0; // Level tidak dikenal
+                        }
+
                         document.getElementById('poinText').innerText = `Total Poin: ${data.data.total_poin}`;
+                        document.getElementById('diskonText').innerText = `Diskon: Hore kamu mendapatkan diskon ${diskon}%!`;
                     } else {
                         alert(data.message); // Menampilkan pesan error
                     }

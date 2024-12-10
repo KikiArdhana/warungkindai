@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\DiskonResource\Pages;
-use App\Filament\Resources\DiskonResource\RelationManagers;
 use App\Models\Diskon;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -43,32 +41,25 @@ class DiskonResource extends Resource
                 TextColumn::make('id_promo')->label('ID Promo'),
                 TextColumn::make('syarat_pembelian')->label('Syarat Pembelian'),
                 TextColumn::make('diskon')->label('Diskon'),
-                TextColumn::make('nama_promo')->label('Nama Promo')
-                ->searchable(),
-                
+                TextColumn::make('nama_promo')->label('Nama Promo'),
+                // Menambahkan relasi ke level
+                TextColumn::make('level.nama_level')->label('Level Tersedia')
+                    ->getStateUsing(function (Diskon $record) {
+                        return optional($record->level)->nama_level ?? 'Tidak Ada'; // Menampilkan level yang terkait
+                    }),
             ])
             ->filters([
                 // Tambahkan filter sesuai kebutuhan
             ])
             ->actions([
-                Tables\Actions\EditAction::make(), // Aksi edit
-                Tables\Actions\DeleteAction::make(), // Aksi edit
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(), // Aksi bulk delete
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     
-
-
-    public static function getRelations(): array
-    {
-        return [
-            // Tambahkan relasi jika diperlukan
-        ];
-    }
 
     public static function getPages(): array
     {

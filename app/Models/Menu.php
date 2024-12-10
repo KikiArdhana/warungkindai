@@ -14,4 +14,10 @@ class Menu extends Model
     protected $primaryKey = 'id_item';
 
     protected $fillable = ['nama_item', 'harga', 'kategori'];
+
+    // Relasi dengan DetailTransaksi (One to Many)
+    public function detailTransaksi()
+    {
+        return $this->hasMany(DetailTransaksi::class, 'id_item');
+    }
 }

@@ -22,46 +22,50 @@ class LevelResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_level') // Input untuk nama_level
-                    ->required() // Pastikan ini diisi
-                    ->maxLength(255) // Atur panjang maksimum sesuai kebutuhan
+                Forms\Components\TextInput::make('nama_level')
+                    ->required()
+                    ->maxLength(255)
                     ->unique(ignoreRecord: true),
 
-                Forms\Components\TextInput::make('min_poin') // Input untuk min_poin
-                    ->required() // Pastikan ini diisi
-                    ->numeric() // Mengatur input sebagai numeric
-                    ->maxLength(10), // Atur panjang maksimum sesuai kebutuhan
+                Forms\Components\TextInput::make('min_poin')
+                    ->required()
+                    ->numeric()
+                    ->maxLength(10),
 
-                Forms\Components\TextInput::make('max_poin') // Input untuk max_poin
-                    ->required() // Pastikan ini diisi
-                    ->numeric() // Mengatur input sebagai numeric
-                    ->maxLength(10), // Atur panjang maksimum sesuai kebutuhan
+                Forms\Components\TextInput::make('max_poin')
+                    ->required()
+                    ->numeric()
+                    ->maxLength(10),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->query(Level::with('diskon')) // Eager load diskon relasi
             ->columns([
-                TextColumn::make('id_level')->label('ID Level'), // Menampilkan ID level
-                TextColumn::make('nama_level')->label('Nama Level'), // Menampilkan Nama Level
-                TextColumn::make('min_poin')->label('Min Poin'), // Menampilkan Min Poin
-                TextColumn::make('max_poin')->label('Max Poin'), // Menampilkan Max Poin
+                TextColumn::make('id_level')->label('ID Level'),
+                TextColumn::make('nama_level')->label('Nama Level'),
+                TextColumn::make('min_poin')->label('Min Poin'),
+                TextColumn::make('max_poin')->label('Max Poin'),
+                // Menampilkan diskon yang tersedia untuk level tersebut
+                TextColumn::make('diskon.diskon')->label('Diskon (%)')
+                    ->getStateUsing(function (Level $record) {
+                        return optional($record->diskon)->diskon ?? 'Tidak ada'; // Menggunakan optional untuk menghindari error jika diskon tidak ada
+                    }),
             ])
             ->filters([
                 // Tambahkan filter sesuai kebutuhan
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(), // Aksi edit
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-
+    
     public static function getRelations(): array
     {
         return [

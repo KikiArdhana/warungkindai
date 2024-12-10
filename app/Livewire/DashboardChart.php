@@ -2,29 +2,27 @@
 
 namespace App\Http\Livewire;
 
-use Asantibanez\LivewireCharts\LivewireChart;
-use Asantibanez\LivewireCharts\Models\BarChartModel;
+use App\Filament\Widgets\BlogPostsChart;
 use Livewire\Component;
-use App\Models\Member;
-use App\Models\Pegawai;
-use App\Models\Transaksi;
-use Asantibanez\LivewireCharts\Models\ColumnChartModel;
+use App\Filament\Widgets\StatsOverview; 
+use App\Filament\Widgets\TransaksiChart; 
+use App\Filament\Widgets\MemberChart; // Impor widget yang sudah dibuat
 
-class DashboardChart extends Component
+class Dashboard extends Component
 {
-    // In your Livewire Component
+    // Fungsi ini digunakan untuk menentukan widget yang akan ditampilkan di dashboard
+    public function getWidgets(): array
+    {
+        return [
+            StatsOverview::class,
+            TransaksiChart::class,
+          // Memanggil StatsOverview Widget
+        ];
+    }
 
-public function render()
-{
-    $columnChartModel = (new ColumnChartModel())
-        ->setTitle('Expenses by Type')
-        ->addColumn('Food', 100, '#f6ad55')
-        ->addColumn('Shopping', 200, '#fc8181')
-        ->addColumn('Travel', 300, '#90cdf4');
-
-    return view('livewire.dashboard-chart', [
-        'columnChartModel' => $columnChartModel
-    ]);
+    public function render()
+    {
+        return view('livewire.dashboard'); // Mengembalikan tampilan dashboard
+    }
 }
 
-}

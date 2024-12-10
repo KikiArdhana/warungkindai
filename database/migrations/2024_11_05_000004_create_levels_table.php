@@ -6,17 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
         Schema::create('level', function (Blueprint $table) {
-            $table->id('id_level');
+            $table->id('id_level'); // Primary Key
             $table->string('nama_level')->unique();
             $table->integer('min_poin');
             $table->integer('max_poin');
+            $table->unsignedBigInteger('id_promo')->nullable()->unique(); // Relasi FK opsional
             $table->timestamps();
+
+            $table->foreign('id_promo')->references('id_promo')->on('diskon')->onDelete('set null');
         });
     }
 

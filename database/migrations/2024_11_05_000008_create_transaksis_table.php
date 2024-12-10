@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawai');
             $table->foreign('id_pelanggan')->references('id_pelanggan')->on('member');
             $table->foreign('id_poin')->references('id_poin')->on('poin');
+
         });
     }
 

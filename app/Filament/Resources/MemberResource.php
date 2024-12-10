@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\MemberResource\Pages;
@@ -33,45 +34,40 @@ class MemberResource extends Resource
                     ->label('Nomor Telepon')
                     ->unique(ignoreRecord: true),
 
-                Forms\Components\Select::make('id_level')
-                    ->label('Level')
-                    ->relationship('level', 'nama_level')
-                    ->required(),
+                Forms\Components\TextInput::make('total_poin')
+                    ->required()
+                    ->label('Total Poin'),
             ]);
     }
 
     public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                TextColumn::make('id_pelanggan')->label('ID Pelanggan'),
-                
-                TextColumn::make('nama_pelanggan')->label('Nama Pelanggan')
-                ->searchable(),
-                TextColumn::make('no_telepon')->label('Nomor Telepon'),
-                TextColumn::make('level.nama_level')->label('Level'),
-                TextColumn::make('total_poin')->label('Total Poin'), // Menggunakan accessor
-                
-            ])
-            ->filters([
-                // Tambahkan filter sesuai kebutuhan
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(), // Aksi edit
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+{
+    return $table
+        ->columns([
+            TextColumn::make('id_pelanggan')->label('ID Pelanggan'),
+            TextColumn::make('nama_pelanggan')->label('Nama Pelanggan')->searchable(),
+            TextColumn::make('no_telepon')->label('Nomor Telepon'),
+            TextColumn::make('total_poin')->label('Total Poin'),
+            TextColumn::make('level.nama_level')->label('Level'),
+            // Menampilkan diskon berdasarkan level member
+            TextColumn::make('diskon.diskon')->label('Diskon (%)')
+                ->getStateUsing(function (Member $record) {
+                    return optional($record->level->diskon)->diskon ?? '-'; // Diskon berdasarkan level
+                }),
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\DeleteBulkAction::make(),
+        ]);
+}
+
 
     public static function getRelations(): array
     {
-        return [
-            // Tambahkan relasi jika diperlukan
-        ];
+        return [];
     }
 
     public static function getPages(): array
