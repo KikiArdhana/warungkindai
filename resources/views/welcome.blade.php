@@ -33,7 +33,7 @@
 
     section {
         padding: 100px 0;
-        height: 100vh;
+     
         
         /* Tinggi setiap section penuh layar */
         display: flex;
