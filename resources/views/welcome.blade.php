@@ -198,7 +198,7 @@
                             View Menu
                         </a>
                         <a href="#reward" class="rounded-full border-2 border-rose-400 px-4 py-2.5 text-white text-sm font-semibold text-rose-400 shadow-lg  hover:text-black transform transition-transform duration-300 hover:scale-110">
-                            Check Reward
+                            Check Rewards
                         </a>
 
                         </a>
